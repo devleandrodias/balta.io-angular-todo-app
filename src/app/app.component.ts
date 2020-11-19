@@ -8,7 +8,7 @@ import { Todo } from 'src/models/todo.model';
 })
 export class AppComponent {
   public todos: Todo[] = [];
-  public title: string = 'Minhas tecnologias';
+  public title: string = 'Minha lista de tarefas!';
 
   constructor() {
     this.todos.push(new Todo(1, 'Ir ao mercado', false));
@@ -22,9 +22,9 @@ export class AppComponent {
     if (index !== -1) this.todos.splice(index, 1);
   }
 
-  markAsDone(todo: Todo) {}
+  markAsDone = (todo: Todo) => (todo.done = true);
 
-  markAdUndone(todo: Todo) {}
+  markAsUndone = (todo: Todo) => (todo.done = false);
 
   /**
    * () = HTML > TS
