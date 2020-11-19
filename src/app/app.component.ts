@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Todo } from 'src/models/todo.model';
 
 @Component({
   selector: 'app-root',
@@ -6,14 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  public todos: any[] = [];
+  public todos: Todo[] = [];
   public title: string = 'Minhas tecnologias';
 
   constructor() {
-    this.todos.push('ReactJS');
-    this.todos.push('Flutter');
-    this.todos.push('Angular');
-    this.todos.push('Azure');
-    this.todos.push('ASP.Net Core 5.0');
+    this.todos.push(new Todo(1, 'Ir ao mercado', false));
+    this.todos.push(new Todo(2, 'Cortar cabelo', false));
+    this.todos.push(new Todo(3, 'Estudar Angular', false));
   }
 }
