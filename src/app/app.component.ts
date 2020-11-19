@@ -13,6 +13,22 @@ export class AppComponent {
   constructor() {
     this.todos.push(new Todo(1, 'Ir ao mercado', false));
     this.todos.push(new Todo(2, 'Cortar cabelo', false));
-    this.todos.push(new Todo(3, 'Estudar Angular', false));
+    this.todos.push(new Todo(3, 'Estudar Angular', true));
   }
+
+  remove(todo: Todo): void {
+    const index = this.todos.indexOf(todo);
+
+    if (index !== -1) this.todos.splice(index, 1);
+  }
+
+  markAsDone(todo: Todo) {}
+
+  markAdUndone(todo: Todo) {}
+
+  /**
+   * () = HTML > TS
+   * [] = TS > HTML
+   * [()] = TS <> HTML
+   */
 }
