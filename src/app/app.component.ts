@@ -14,6 +14,8 @@ export class AppComponent {
   public form: FormGroup;
 
   constructor(private _formBuilder: FormBuilder) {
+    this.load();
+
     this.form = this._formBuilder.group({
       title: [
         'Insira sua tarefa',
@@ -24,15 +26,19 @@ export class AppComponent {
         ]),
       ],
     });
-    this.todos.push(new Todo(1, 'Ir ao mercado', false));
-    this.todos.push(new Todo(2, 'Cortar cabelo', false));
-    this.todos.push(new Todo(3, 'Estudar Angular', true));
+
+    if (this.todos.length === 0) {
+      this.todos.push(new Todo(1, 'Ir ao mercado', false));
+      this.todos.push(new Todo(2, 'Cortar cabelo', false));
+      this.todos.push(new Todo(3, 'Estudar Angular', true));
+    }
   }
 
   add() {
     const title = this.form.controls['title'].value;
     const id = this.todos.length + 1;
     this.todos.push(new Todo(id, title, false));
+    this.save();
     this.clear();
   }
 
@@ -43,12 +49,28 @@ export class AppComponent {
   remove(todo: Todo): void {
     const index = this.todos.indexOf(todo);
 
-    if (index !== -1) this.todos.splice(index, 1);
+    if (index !== -1) {
+      this.todos.splice(index, 1);
+      this.save();
+    }
   }
 
-  markAsDone = (todo: Todo) => (todo.done = true);
+  markAsDone = (todo: Todo) => {
+    todo.done = true;
+    this.save();
+  };
 
-  markAsUndone = (todo: Todo) => (todo.done = false);
+  markAsUndone = (todo: Todo) => {
+    todo.done = false;
+    this.save();
+  };
+
+  save = () => localStorage.setItem('todos', JSON.stringify(this.todos));
+
+  load = () => {
+    const data = localStorage.getItem('todos');
+    if (data) this.todos = JSON.parse(data);
+  };
 
   /**
    * () = HTML > TS
