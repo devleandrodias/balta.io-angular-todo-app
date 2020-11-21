@@ -4,10 +4,16 @@
     <small style="font-size: 1em">Não tem nenhuma tarefa hoje!</small>
   </p>
   <li *ngFor="let todo of todos">
-    {{ todo.title }} -
-    <button (click)="markAsDone(todo)" *ngIf="!todo.done">Concluir</button>
-    <button (click)="markAsUndone(todo)" *ngIf="todo.done">Refazer</button>
-    <button (click)="remove(todo)">Remover</button>
+    {{ todo.title }}
+    <button (click)="remove(todo)">
+      <i class="fas fa-trash"></i>
+    </button>
+    <button (click)="markAsDone(todo)" *ngIf="!todo.done">
+      <i class="far fa-check-circle"></i>
+    </button>
+    <button (click)="markAsUndone(todo)" *ngIf="todo.done">
+      <i class="fas fa-check-circle"></i>
+    </button>
   </li>
 </ul>
 
@@ -38,6 +44,7 @@
 
 <button
   class="add-button animated fadeInUp button"
+  style="margin-top: 50px"
   (click)="changeMode('add')"
   *ngIf="mode === 'list'"
 >
