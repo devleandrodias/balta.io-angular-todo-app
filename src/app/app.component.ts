@@ -18,7 +18,7 @@ export class AppComponent {
 
     this.form = this._formBuilder.group({
       title: [
-        'Insira sua tarefa',
+        '',
         Validators.compose([
           Validators.minLength(3),
           Validators.maxLength(60),
@@ -26,12 +26,6 @@ export class AppComponent {
         ]),
       ],
     });
-
-    if (this.todos.length === 0) {
-      this.todos.push(new Todo(1, 'Ir ao mercado', false));
-      this.todos.push(new Todo(2, 'Cortar cabelo', false));
-      this.todos.push(new Todo(3, 'Estudar Angular', true));
-    }
   }
 
   add() {
@@ -69,7 +63,11 @@ export class AppComponent {
 
   load = () => {
     const data = localStorage.getItem('todos');
-    if (data) this.todos = JSON.parse(data);
+    if (data) {
+      this.todos = JSON.parse(data);
+    } else {
+      this.todos = [];
+    }
   };
 
   /**
