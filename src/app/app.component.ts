@@ -8,8 +8,9 @@ import { Todo } from 'src/models/todo.model';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+  public mode: string = 'list';
   public todos: Todo[] = [];
-  public title: string = 'Minha lista de tarefas!';
+  public title: string = 'Lista de tarefas!';
 
   public form: FormGroup;
 
@@ -69,6 +70,8 @@ export class AppComponent {
       this.todos = [];
     }
   };
+
+  changeMode = (mode: string) => (this.mode = mode);
 
   /**
    * () = HTML > TS
