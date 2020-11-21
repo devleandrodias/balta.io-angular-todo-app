@@ -60,7 +60,10 @@ export class AppComponent {
     this.save();
   };
 
-  save = () => localStorage.setItem('todos', JSON.stringify(this.todos));
+  save = () => {
+    localStorage.setItem('todos', JSON.stringify(this.todos));
+    this.mode = 'list';
+  };
 
   load = () => {
     const data = localStorage.getItem('todos');
